@@ -1,0 +1,39 @@
+USE [Spr14Sect1Team9]
+GO
+
+/****** Object:  Table [TinyVid].[Movie]    Script Date: 3/9/2014 4:53:43 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [TinyVid].[Movie](
+	[Movie_Num] [int] IDENTITY(1,1) NOT NULL,
+	[Movie_Title] [varchar](25) NOT NULL,
+	[Movie_Year] [varchar](4) NOT NULL,
+	[Movie_Cost] [int] NOT NULL,
+	[Movie_Genre] [varchar](20) NOT NULL,
+	[Price_Code] [int] NOT NULL,
+ CONSTRAINT [movie_PK] PRIMARY KEY CLUSTERED 
+(
+	[Movie_Num] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+ALTER TABLE [TinyVid].[Movie]  WITH CHECK ADD  CONSTRAINT [movie_FK] FOREIGN KEY([Price_Code])
+REFERENCES [TinyVid].[Price] ([Price_Code])
+GO
+
+ALTER TABLE [TinyVid].[Movie] CHECK CONSTRAINT [movie_FK]
+GO
+
+
