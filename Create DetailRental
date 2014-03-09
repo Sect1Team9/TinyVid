@@ -1,13 +1,6 @@
 USE [Spr14Sect1Team9]
 GO
 
-/****** Object:  Table [TinyVid].[DetailRental]    Script Date: 3/9/2014 4:51:48 PM ******/
-SET ANSI_NULLS ON
-GO
-
-SET QUOTED_IDENTIFIER ON
-GO
-
 CREATE TABLE [TinyVid].[DetailRental](
 	[Rent_Num] [int] IDENTITY(1,1) NOT NULL,
 	[Vid_Num] [int] NOT NULL,
@@ -15,26 +8,8 @@ CREATE TABLE [TinyVid].[DetailRental](
 	[Due_Date] [date] NOT NULL,
 	[Return_Date] [date] NULL,
 	[Daily_Late_Fee] [int] NULL,
- CONSTRAINT [PK1_DetailRental] PRIMARY KEY CLUSTERED 
-(
-	[Rent_Num] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
+ CONSTRAINT [PK_DetailRental] PRIMARY KEY (Rent_Num, Vid_Num),
+ CONSTRAINT [DetailRental_FK1] FOREIGN KEY (Rent_Num) REFERENCES TinyVid.Rental (Rent_Num),
+ CONSTRAINT [DetailRental_FK2] FOREIGN KEY (Vid_Num) REFERENCES TinyVid.Video (Vid_Num));
 
-GO
-
-ALTER TABLE [TinyVid].[DetailRental]  WITH CHECK ADD  CONSTRAINT [FK1_DetailRental] FOREIGN KEY([Rent_Num])
-REFERENCES [TinyVid].[Rental] ([Rent_Num])
-GO
-
-ALTER TABLE [TinyVid].[DetailRental] CHECK CONSTRAINT [FK1_DetailRental]
-GO
-
-ALTER TABLE [TinyVid].[DetailRental]  WITH CHECK ADD  CONSTRAINT [FK2_DetailRental] FOREIGN KEY([Vid_Num])
-REFERENCES [TinyVid].[Video] ([Vid_Num])
-GO
-
-ALTER TABLE [TinyVid].[DetailRental] CHECK CONSTRAINT [FK2_DetailRental]
-GO
-
-
+ GO
